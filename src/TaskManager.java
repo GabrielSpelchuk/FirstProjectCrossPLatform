@@ -1,6 +1,4 @@
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class TaskManager
 {
@@ -118,5 +116,98 @@ public class TaskManager
         }
         else
             System.out.println("Видалення скасоване.");
+    }
+
+    public void sortByTitle()
+    {
+        if(tasks.isEmpty())
+        {
+            System.out.println("Список завдань порожній.");
+            return;
+        }
+
+        System.out.println("\nВиберіть порядок сортування:");
+        System.out.println("1. За зростанням");
+        System.out.println("2. За спаданням");
+        System.out.print(": ");
+
+        int choice = scanner.nextInt();
+        scanner.nextLine();
+
+        switch(choice)
+        {
+            case 1:
+                tasks.sort(new TitleComparatorAscending());
+                System.out.println("Завдання успішно відсортовано:");
+                break;
+            case 2:
+                tasks.sort(new TitleComparatorDescending());
+                System.out.println("Завдання успішно відсортовано.");
+                break;
+            default:
+                System.out.println("Число введено не вірно.");
+        }
+    }
+
+    public void sortByDescription()
+    {
+        if(tasks.isEmpty())
+        {
+            System.out.println("Список завдань порожній.");
+            return;
+        }
+
+        System.out.println("\nВиберіть порядок сортування:");
+        System.out.println("1. За зростанням");
+        System.out.println("2. За спаданням");
+        System.out.print(": ");
+
+        int choice = scanner.nextInt();
+        scanner.nextLine();
+
+        switch(choice)
+        {
+            case 1:
+                tasks.sort(new DescriptionComparatorAscending());
+                System.out.println("Завдання успішно відсортовано.");
+                break;
+            case 2:
+                tasks.sort(new DescriptionComparatorDescending());
+                System.out.println("Завдання успішно відсортовано.");
+                break;
+            default:
+                System.out.println("Число введено не вірно.");
+        }
+    }
+
+    public void sortByCreatedTime()
+    {
+        if(tasks.isEmpty())
+        {
+            System.out.println("Список завдань порожній.");
+            return;
+        }
+
+        System.out.println("\nВиберіть порядок сортування:");
+        System.out.println("1. Від найновіших до найстарих");
+        System.out.println("2. Від найстарих до найновіших");
+        System.out.print(": ");
+
+        int choice = scanner.nextInt();
+        scanner.nextLine();
+
+        switch(choice)
+        {
+            case 1:
+                tasks.sort(new CreatedAtComparatorAscending());
+                System.out.println("Завдання успішно відсортовано.");
+                break;
+            case 2:
+                tasks.sort(new CreatedAtComparatorDescending());
+                System.out.println("Завдання успішно відсортовано.");
+                break;
+            default:
+                System.out.println("Число введено не вірно.");
+        }
     }
 }

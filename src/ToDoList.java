@@ -12,7 +12,8 @@ public class ToDoList {
             System.out.println("2. Додати завдання");
             System.out.println("3. Оновити завдання");
             System.out.println("4. Видалити завдання");
-            System.out.println("5. Вихід");
+            System.out.println("5. Сортувати завдання");
+            System.out.println("6. Вихід");
             System.out.print("Виберіть опцію: ");
 
             int choice = scanner.nextInt();
@@ -33,6 +34,9 @@ public class ToDoList {
                     taskManager.deleteTask();
                     break;
                 case 5:
+                    sortedBy();
+                    break;
+                case 6:
                     System.out.println("Вихід з застосунку....");
                     System.exit(0);
                     break;
@@ -49,5 +53,32 @@ public class ToDoList {
         System.out.print("Введіть опис завдання: ");
         String description = scanner.nextLine();
         taskManager.createTask(title, description);
+    }
+
+    public static void sortedBy()
+    {
+        System.out.println("\nВиберіть метод сортування:");
+        System.out.println("1. За заголовком");
+        System.out.println("2. За довжиною опису");
+        System.out.println("3. За датою створення");
+        System.out.print(": ");
+
+        int choice = scanner.nextInt();
+        scanner.nextLine();
+
+        switch(choice)
+        {
+            case 1:
+                taskManager.sortByTitle();
+                break;
+            case 2:
+                taskManager.sortByDescription();
+                break;
+            case 3:
+                taskManager.sortByCreatedTime();
+                break;
+            case 4:
+                System.out.println("Число введено не вірно.");
+        }
     }
 }
