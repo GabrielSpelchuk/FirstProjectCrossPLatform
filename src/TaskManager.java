@@ -2,8 +2,7 @@ import java.util.*;
 
 public class TaskManager
 {
-    private final List<Task> tasks = new ArrayList<>();
-    private final Scanner scanner = new Scanner(System.in);
+    public List<Task> tasks = new ArrayList<>();
 
     public void createTask(String title, String description)
     {
@@ -21,31 +20,8 @@ public class TaskManager
                 System.out.println(t);
     }
 
-    public void updateTask()
+    public void updateTask(int id, String newTitle, String newDescription)
     {
-        if (tasks.isEmpty())
-        {
-            System.out.println("Список завдань порожній.");
-            return;
-        }
-
-        System.out.println("\n Список завдань:");
-        for (int i = 0; i < tasks.size(); i++) {
-            System.out.println((i + 1) + ". " + tasks.get(i));
-        }
-
-        System.out.print("Введіть номер завдання для оновлення (0 - скасування): ");
-
-        if(!scanner.hasNextInt())
-        {
-            System.out.println("Помилка: введіть число.");
-            scanner.next();
-            return;
-        }
-
-        int id = scanner.nextInt();
-        scanner.nextLine();
-
         if(id == 0)
         {
             System.out.println("Оновлення скасоване.");
@@ -57,11 +33,6 @@ public class TaskManager
             return;
         }
 
-        System.out.print("Введіть новий заголовок: ");
-        String newTitle = scanner.nextLine();
-        System.out.print("Введіть новий опис: ");
-        String newDescription = scanner.nextLine();
-
         Task task = tasks.get(id - 1);
         task.setTitle(newTitle);
         task.setDescription(newDescription);
@@ -69,31 +40,8 @@ public class TaskManager
         System.out.println("Завдання успішно оновленно.");
     }
 
-    public void deleteTask()
+    public void deleteTask(int id)
     {
-        if (tasks.isEmpty())
-        {
-            System.out.println("Список завдань порожній.");
-            return;
-        }
-
-        System.out.println("\n Список завдань:");
-        for (int i = 0; i < tasks.size(); i++) {
-            System.out.println((i+1) + ". " + tasks.get(i));
-        }
-
-        System.out.print("Введіть номер завдання для видалення (0 - скасування): ");
-
-        if(!scanner.hasNextInt())
-        {
-            System.out.println("Помилка: введіть число.");
-            scanner.next();
-            return;
-        }
-
-        int id = scanner.nextInt();
-        scanner.nextLine();
-
         if(id == 0)
         {
             System.out.println("Видалення скасоване.");
@@ -106,34 +54,12 @@ public class TaskManager
             return;
         }
 
-        System.out.print("Ви впевнені що хочете видалити це завдання? (так/ні): ");
-        String confirmation = scanner.nextLine().trim().toLowerCase();
-
-        if (confirmation.equals("так"))
-        {
-            Task taskToDelete = tasks.remove(id - 1);
-            System.out.println("Завдання \"" + taskToDelete.getTitle() + "\" видалено.");
-        }
-        else
-            System.out.println("Видалення скасоване.");
+        Task taskToDelete = tasks.remove(id - 1);
+        System.out.println("Завдання \"" + taskToDelete.getTitle() + "\" видалено.");
     }
 
-    public void sortByTitle()
+    public void sortByTitle(int choice)
     {
-        if(tasks.isEmpty())
-        {
-            System.out.println("Список завдань порожній.");
-            return;
-        }
-
-        System.out.println("\nВиберіть порядок сортування:");
-        System.out.println("1. За зростанням");
-        System.out.println("2. За спаданням");
-        System.out.print(": ");
-
-        int choice = scanner.nextInt();
-        scanner.nextLine();
-
         switch(choice)
         {
             case 1:
@@ -149,22 +75,8 @@ public class TaskManager
         }
     }
 
-    public void sortByDescription()
+    public void sortByDescription(int choice)
     {
-        if(tasks.isEmpty())
-        {
-            System.out.println("Список завдань порожній.");
-            return;
-        }
-
-        System.out.println("\nВиберіть порядок сортування:");
-        System.out.println("1. За зростанням");
-        System.out.println("2. За спаданням");
-        System.out.print(": ");
-
-        int choice = scanner.nextInt();
-        scanner.nextLine();
-
         switch(choice)
         {
             case 1:
@@ -180,22 +92,8 @@ public class TaskManager
         }
     }
 
-    public void sortByCreatedTime()
+    public void sortByCreatedTime(int choice)
     {
-        if(tasks.isEmpty())
-        {
-            System.out.println("Список завдань порожній.");
-            return;
-        }
-
-        System.out.println("\nВиберіть порядок сортування:");
-        System.out.println("1. Від найновіших до найстарих");
-        System.out.println("2. Від найстарих до найновіших");
-        System.out.print(": ");
-
-        int choice = scanner.nextInt();
-        scanner.nextLine();
-
         switch(choice)
         {
             case 1:
