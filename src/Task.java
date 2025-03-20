@@ -1,10 +1,12 @@
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Task
 {
     private String title;
     private String description;
     private final LocalDateTime createdAt;
+    public static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     public Task(String title, String description)
     {

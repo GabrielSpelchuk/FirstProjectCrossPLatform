@@ -1,9 +1,15 @@
+import java.util.Locale;
 import java.util.Scanner;
+import java.time.LocalDate;
 
 public class ToDoList {
     public static void main(String[] args) {
         final Scanner scanner = new Scanner(System.in);
         final TaskManager taskManager = new TaskManager();
+        int id, choice;
+        String title, description;
+        LocalDate date;
+
         while(true)
         {
             System.out.println("\n=======Менеджер завдань=======");
@@ -12,11 +18,11 @@ public class ToDoList {
             System.out.println("3. Оновити завдання");
             System.out.println("4. Видалити завдання");
             System.out.println("5. Сортувати завдання");
-            System.out.println("6. Вихід");
+            System.out.println("6. Пошук завдання");
+            System.out.println("7. Вихід");
             System.out.print("Виберіть опцію: ");
 
-            int id;
-            int choice = scanner.nextInt();
+            choice = scanner.nextInt();
             scanner.nextLine();
 
             switch(choice)
@@ -27,9 +33,9 @@ public class ToDoList {
 
                 case 2:
                     System.out.print("Введіть назву завдання: ");
-                    String title = scanner.nextLine();
+                    title = scanner.nextLine();
                     System.out.print("Введіть опис завдання: ");
-                    String description = scanner.nextLine();
+                    description = scanner.nextLine();
                     taskManager.createTask(title, description);
                     break;
 
@@ -57,11 +63,11 @@ public class ToDoList {
                     scanner.nextLine();
 
                     System.out.print("Введіть новий заголовок: ");
-                    String newTitle = scanner.nextLine();
+                    title = scanner.nextLine();
                     System.out.print("Введіть новий опис: ");
-                    String newDescription = scanner.nextLine();
+                    description = scanner.nextLine();
 
-                    taskManager.updateTask(id, newTitle, newDescription);
+                    taskManager.updateTask(id, title, description);
                     break;
 
                 case 4:
@@ -163,6 +169,37 @@ public class ToDoList {
                     break;
 
                 case 6:
+                    if(taskManager.tasks.isEmpty())
+                    {
+                        System.out.println("Список завдань порожній.");
+                        return;
+                    }
+
+                    System.out.println("\nВиберіть тип пошуку");
+                    System.out.println("1. За назвою");
+                    System.out.println("2. За датою");
+                    System.out.print(": ");
+
+                    choice = scanner.nextInt();
+                    scanner.nextLine();
+
+                    if(choice == 1)
+                    {
+                        System.out.print("Введіть заголовок: ");
+                        title = scanner.nextLine().toLowerCase(Locale.ROOT);
+
+                        taskManager.searchByTitle(title);
+                    } else if (choice == 2) {
+                        System.out.print("Введіть дату (формат yyyy-MM-dd): ");
+                        date = LocalDate.parse(scanner.nextLine(), Task.DATE_FORMAT);
+
+                        taskManager.searchByData(date);
+                    }
+                    else
+                        System.out.println("Немає такого типу пошуку.");
+                    break;
+
+                case 7:
                     System.out.println("Вихід з застосунку....");
                     System.exit(0);
                     break;

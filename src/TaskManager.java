@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.*;
 
 public class TaskManager
@@ -107,5 +108,37 @@ public class TaskManager
             default:
                 System.out.println("Число введено не вірно.");
         }
+    }
+
+    public void searchByTitle(String title)
+    {
+        boolean found = false;
+
+        System.out.println("Знайдені завдання: ");
+        for(Task task : tasks)
+            if(task.getTitle().toLowerCase(Locale.ROOT).equals(title))
+            {
+                System.out.println(task);
+                found = true;
+            }
+
+        if(!found)
+            System.out.println("Жодного завдання не знайдено.");
+    }
+
+    public void searchByData(LocalDate date)
+    {
+        boolean found = false;
+
+        System.out.println("Знайдені завдання: ");
+        for(Task task : tasks)
+            if(task.getCreatedAt().toLocalDate().equals(date))
+            {
+                System.out.println(task);
+                found = true;
+            }
+
+        if(!found)
+            System.out.println("Жодного завдання не знайдено.");
     }
 }
